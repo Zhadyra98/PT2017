@@ -1,0 +1,5 @@
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Простое число\bin\Debug\ConsoleApplication3.exe.config
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Простое число\obj\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Простое число\obj\Debug\ConsoleApplication3.pdb
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Простое число\bin\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Простое число\bin\Debug\ConsoleApplication3.pdb

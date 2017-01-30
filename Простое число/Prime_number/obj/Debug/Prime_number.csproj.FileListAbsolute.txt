@@ -1,0 +1,6 @@
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\bin\Debug\ConsoleApplication3.exe.config
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\obj\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\obj\Debug\ConsoleApplication3.pdb
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\obj\Debug\Prime_number.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\bin\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017\Простое число\Prime_number\bin\Debug\ConsoleApplication3.pdb
