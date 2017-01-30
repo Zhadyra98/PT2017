@@ -1,0 +1,6 @@
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\bin\Debug\Minimal primal.exe.config
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\bin\Debug\Minimal primal.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\bin\Debug\Minimal primal.pdb
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\obj\Debug\Minimal primal.csprojResolveAssemblyReference.cache
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\obj\Debug\Minimal primal.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\Minimal primal\Minimal primal\obj\Debug\Minimal primal.pdb
