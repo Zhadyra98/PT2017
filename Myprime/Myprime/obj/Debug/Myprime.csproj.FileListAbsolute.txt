@@ -1,0 +1,6 @@
+c:\users\пользователь\documents\visual studio 2015\Projects\Myprime\Myprime\bin\Debug\Myprime.exe.config
+C:\Users\Пользователь\Documents\Visual Studio 2015\Projects\Myprime\Myprime\bin\Debug\Myprime.exe
+C:\Users\Пользователь\Documents\Visual Studio 2015\Projects\Myprime\Myprime\bin\Debug\Myprime.pdb
+C:\Users\Пользователь\Documents\Visual Studio 2015\Projects\Myprime\Myprime\obj\Debug\Myprime.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Documents\Visual Studio 2015\Projects\Myprime\Myprime\obj\Debug\Myprime.exe
+C:\Users\Пользователь\Documents\Visual Studio 2015\Projects\Myprime\Myprime\obj\Debug\Myprime.pdb
