@@ -1,0 +1,6 @@
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\bin\Debug\minandmax.exe.config
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\obj\Debug\minandmax.csprojResolveAssemblyReference.cache
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\bin\Debug\minandmax.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\bin\Debug\minandmax.pdb
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\obj\Debug\minandmax.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\obj\Debug\minandmax.pdb
