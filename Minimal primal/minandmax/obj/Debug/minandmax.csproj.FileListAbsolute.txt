@@ -4,3 +4,9 @@ c:\users\пользователь\documents\visual studio 2015\Projects\minandma
 c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\bin\Debug\minandmax.pdb
 c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\obj\Debug\minandmax.exe
 c:\users\пользователь\documents\visual studio 2015\Projects\minandmax\minandmax\obj\Debug\minandmax.pdb
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\bin\Debug\minandmax.exe.config
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\obj\Debug\minandmax.exe
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\obj\Debug\minandmax.pdb
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\bin\Debug\minandmax.exe
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\bin\Debug\minandmax.pdb
+C:\Users\Пользователь\Desktop\PT2017\Minimal primal\minandmax\obj\Debug\minandmax.csprojResolveAssemblyReference.cache

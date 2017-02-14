@@ -1,0 +1,3 @@
+C:\Users\Пользователь\Desktop\PT2017\Stack\Stack\bin\Debug\ConsoleApplication10.exe.config
+C:\Users\Пользователь\Desktop\PT2017\Stack\Stack\obj\Debug\ConsoleApplication10.exe
+C:\Users\Пользователь\Desktop\PT2017\Stack\Stack\obj\Debug\ConsoleApplication10.pdb

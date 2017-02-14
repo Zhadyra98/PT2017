@@ -1,0 +1,11 @@
+c:\users\пользователь\documents\visual studio 2015\Projects\MyFar\MyFar\bin\Debug\MyFar.exe.config
+c:\users\пользователь\documents\visual studio 2015\Projects\MyFar\MyFar\bin\Debug\MyFar.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\MyFar\MyFar\bin\Debug\MyFar.pdb
+c:\users\пользователь\documents\visual studio 2015\Projects\MyFar\MyFar\obj\Debug\MyFar.exe
+c:\users\пользователь\documents\visual studio 2015\Projects\MyFar\MyFar\obj\Debug\MyFar.pdb
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\bin\Debug\MyFar.exe.config
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\obj\Debug\MyFar.exe
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\obj\Debug\MyFar.pdb
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\bin\Debug\MyFar.exe
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\bin\Debug\MyFar.pdb
+C:\Users\Пользователь\Desktop\PT2017\MyFar\MyFar\obj\Debug\MyFar.csprojResolveAssemblyReference.cache
