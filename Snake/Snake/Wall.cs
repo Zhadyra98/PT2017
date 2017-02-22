@@ -12,7 +12,7 @@ namespace Snake
     {
         public char sign;
         public ConsoleColor color;
-        List<Point> body;
+       public List<Point> body;
 
         public Wall()
         {

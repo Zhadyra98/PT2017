@@ -32,17 +32,20 @@ namespace Complex
                 return gcd(y % x, x);
             }
             //provide overload a binary operator +
-            public static Complex operator +(Complex x, Complex y)
+
+            public static Complex operator +(Complex a, Complex b)
             {
-                //changed the purpose of  +  by adding new class 
-                Complex c = new Complex((x.x * y.y + y.x * x.y)/ gcd(x.x * y.y + y.x * x.y, x.y * y.y), (x.y * y.y) / (gcd(x.x * y.y + y.x * x.y, x.y * y.y)));
+                Complex c = new Complex(a.x * b.y + a.y * b.x/gcd(a.x * b.y + a.y * b.x, a.y * b.y), a.y * b.y/ gcd(a.x * b.y + a.y * b.x, a.y * b.y));
 
 
-
-                return (c);
-                
-           
+            return c;
             }
+
+
+
+
+
+
         
             //provide overload a binary operator -
             public static Complex operator -(Complex x, Complex y)

@@ -7,26 +7,33 @@ using System.Collections;
 
 namespace Snake
 {
+
     class Snake
     {
-        public int cnt;
+        
         public char sign;
         public ConsoleColor color;
         public List<Point> body;
+       
         public Snake()
         {
+            SetSnake();
+            }
+        
+            public void SetSnake ()
+        {
+            int x = new Random().Next(1, 69);
+            int y = new Random().Next(1, 34);
             sign = 'o';
             color = ConsoleColor.Red;
             body = new List<Point>();
-            body.Add(new Point(10, 10));
-            cnt = 1;
-            }
-        
-
+            body.Add(new Point(x, y));
+         
+        }
         public void Move(int dx, int dy)
         {
-            if (cnt % 10 == 0)
-                body.Add(new Point(0, 0));   
+           // if (cnt % 10 == 0)
+               // body.Add(new Point(0, 0));   
         
         for (int i = body.Count - 1; i >= 1; i--)
             {
@@ -47,8 +54,27 @@ namespace Snake
                 body[0].y = Console.WindowHeight - 10;
 
 
-            cnt++;
+          //  cnt++;
         }
+        public bool CanEat(Food f)
+        {
+            if (body[0].x == f.location.x && body[0].y == f.location.y)
+            {
+                body.Add(new Point(f.location.x, f.location.y)); // new Point(body[0].x, body[0].y)
+                return true;
+            }
+            return false;
+        }
+        public bool CollistionWithWall(Wall w)
+        {
+            foreach (Point p in w.body)
+            {
+                if (body[0].x == p.x && body[0].y == p.y)
+                    return true;
+            }
+            return false;
+        }
+      
 
         public void Draw()
         {

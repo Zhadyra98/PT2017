@@ -26,7 +26,12 @@ namespace MyFar
 
 
 
-            }} 
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+         
+            Console.WriteLine(' ');
+           
+        } 
              static void Main(string[] args)
         {
             Console.CursorVisible = false;
@@ -39,13 +44,18 @@ namespace MyFar
                     case ConsoleKey.UpArrow:
                         if (cursor > 0)
                             cursor = cursor - 1;
+                       else if (cursor == 0)
+                            cursor = dir.GetFileSystemInfos().Length - 1;
                         break;
                     case ConsoleKey.DownArrow:
                         if (cursor < dir.GetFileSystemInfos().Length - 1)
                             cursor = cursor + 1;
+                       else if (cursor == dir.GetFileSystemInfos().Length - 1)
+                            cursor = 0;
                         break;
                     case ConsoleKey.Enter:
                         FileSystemInfo fs = dir.GetFileSystemInfos()[cursor];
+                        cursor = 0;
                         if (fs.GetType() == typeof(DirectoryInfo))
                         {
                             dir = new DirectoryInfo(fs.FullName);
