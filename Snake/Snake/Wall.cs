@@ -14,12 +14,15 @@ namespace Snake
         public ConsoleColor color;
        public List<Point> body;
 
-        public Wall()
+        public Wall(int x)
         {
             sign = '*';
             color = ConsoleColor.Green;
             body = new List<Point>();
-            StreamReader sr = new StreamReader("input.txt");
+            DirectoryInfo fs = new DirectoryInfo(@"c:\HW\folder");
+            FileInfo[] files = fs.GetFiles();
+            StreamReader sr = new StreamReader(files[x].FullName);
+         
             int n = int.Parse(sr.ReadLine());
             for (int i = 0; i < n; i++)
             {

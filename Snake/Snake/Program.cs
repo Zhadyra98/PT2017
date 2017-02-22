@@ -44,11 +44,16 @@ namespace Snake
         static void Main(string[] args)
         {
             Console.SetWindowSize(70, 35);
-
+            Console.SetCursorPosition(20, 20);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Wanna play? " + "Press any key to start");
             Console.CursorVisible = false;
+            int i = 0;
+            int u = 0;
             Food food = new Food();
             Snake snake = new Snake();
-            Wall wall = new Wall();
+           
+           
        /* snake = new Snake();
              wall = new Wall();
             Thread thread = new Thread(Move);
@@ -62,11 +67,13 @@ namespace Snake
 
             while (!Gameover==true)
             {
+                Wall wall = new Wall(i);
                 ConsoleKeyInfo btn = Console.ReadKey();
                 switch (btn.Key)
                 {
                     case ConsoleKey.UpArrow:
                         snake.Move(0, -1);
+                        
                         break;
                     case ConsoleKey.DownArrow:
                         snake.Move(0, 1);
@@ -85,6 +92,8 @@ namespace Snake
 
                 if (snake.CanEat(food))
                 {
+                    u++;
+                  
                     food.SetRandomPosition();
                 }
             
@@ -104,15 +113,32 @@ namespace Snake
                }
 
                 Console.Clear();
-                snake.Draw();
+                snake.Draw(btn);
                 wall.Draw();
                 food.Draw();
 
+                if (snake.body.Count == 4)
+                {
+                     i++;
+
+                  snake.SetSnake();
+                }
+                if (i == 4)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You're quite cool gamer");
+                    Console.ReadKey();
+                }
+                int e = i + 1;
+                Console.SetCursorPosition(40, 29);
+                Console.WriteLine("Current level is "+e);
+                Console.SetCursorPosition(40, 30);
+                Console.WriteLine("Point: " + u);
             }
             Console.Clear();
             Console.SetCursorPosition(10, 10);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("GAME OVER!");
+            Console.Write("GAME is OVER!");
             Console.ReadKey();
         }
     }

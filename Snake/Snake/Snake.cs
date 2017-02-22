@@ -11,7 +11,7 @@ namespace Snake
     class Snake
     {
         
-        public char sign;
+        public char sign = '|';
         public ConsoleColor color;
         public List<Point> body;
        
@@ -22,9 +22,9 @@ namespace Snake
         
             public void SetSnake ()
         {
-            int x = new Random().Next(1, 69);
-            int y = new Random().Next(1, 34);
-            sign = 'o';
+            int x = 40;
+            int y = 40;
+           
             color = ConsoleColor.Red;
             body = new List<Point>();
             body.Add(new Point(x, y));
@@ -58,9 +58,9 @@ namespace Snake
         }
         public bool CanEat(Food f)
         {
-            if (body[0].x == f.location.x && body[0].y == f.location.y)
+            if (body[0].x == f./*location.*/x && body[0].y == f./*location.*/y)
             {
-                body.Add(new Point(f.location.x, f.location.y)); // new Point(body[0].x, body[0].y)
+                body.Add(new Point(f./*location.*/x, f./*location.*/y)); // new Point(body[0].x, body[0].y)
                 return true;
             }
             return false;
@@ -76,16 +76,24 @@ namespace Snake
         }
       
 
-        public void Draw()
+        public void Draw(ConsoleKeyInfo btn)
         {
-       
+        
             Console.ForegroundColor = color;
-        foreach (Point p in body)
+        if (btn.Key==ConsoleKey.DownArrow|| btn.Key == ConsoleKey.UpArrow)
+            foreach (Point p in body)
         {
             Console.SetCursorPosition(p.x, p.y);
 
             Console.Write(sign);
         }
+            if (btn.Key == ConsoleKey.LeftArrow || btn.Key == ConsoleKey.RightArrow)
+                foreach (Point p in body)
+                {
+                    Console.SetCursorPosition(p.x, p.y);
+
+                    Console.Write("—");
+                }
 
         }
     }
