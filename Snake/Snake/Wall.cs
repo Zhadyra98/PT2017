@@ -10,9 +10,29 @@ namespace Snake
 {
     class Wall
     {
+        /* public char sign;
+         public ConsoleColor color;
+        public List<Point> body;
+
+         public Wall()
+         {
+             sign = '*';
+             color = ConsoleColor.Green;
+             body = new List<Point>();
+             StreamReader sr = new StreamReader("input.txt");
+             int n = int.Parse(sr.ReadLine());
+             for (int i = 0; i < n; i++)
+             {
+                 string line = sr.ReadLine();
+                 for (int j = 0; j < line.Length; j++)
+                     if (line[j] == '*')
+                         body.Add(new Point(j, i));
+             }
+             sr.Close();
+         }*/
         public char sign;
         public ConsoleColor color;
-       public List<Point> body;
+        public List<Point> body;
 
         public Wall(int x)
         {
@@ -22,7 +42,7 @@ namespace Snake
             DirectoryInfo fs = new DirectoryInfo(@"c:\HW\folder");
             FileInfo[] files = fs.GetFiles();
             StreamReader sr = new StreamReader(files[x].FullName);
-         
+
             int n = int.Parse(sr.ReadLine());
             for (int i = 0; i < n; i++)
             {
@@ -33,6 +53,7 @@ namespace Snake
             }
             sr.Close();
         }
+
 
         public void Draw()
         {

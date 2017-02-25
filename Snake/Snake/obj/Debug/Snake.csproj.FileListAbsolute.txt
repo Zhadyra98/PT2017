@@ -10,3 +10,9 @@ C:\Users\Пользователь\Desktop\PT2017\Snake\Snake\obj\Debug\Snake.pdb
 C:\Users\Пользователь\Desktop\PT2017\Snake\Snake\bin\Debug\Snake.exe
 C:\Users\Пользователь\Desktop\PT2017\Snake\Snake\bin\Debug\Snake.pdb
 C:\Users\Пользователь\Desktop\PT2017\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\bin\Debug\Snake.exe.config
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\obj\Debug\Snake.exe
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\obj\Debug\Snake.pdb
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\bin\Debug\Snake.exe
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\bin\Debug\Snake.pdb
+C:\Users\Пользователь\Desktop\PT2017 — копия\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
