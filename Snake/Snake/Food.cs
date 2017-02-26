@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Snake
 {
-    class Food
+ public   class Food
     {
         public Point location;
         public ConsoleColor color = ConsoleColor.Red;
         public char sign = '$';
-     
+        public Food() { }
 
-        public Food()
+        public Food(int a)
         {
             SetRandomPosition();
+            
         }
 
         public void SetRandomPosition()
@@ -25,7 +28,16 @@ namespace Snake
             int y = new Random().Next(1, 34);
             location = new Point(x, y);
         }
-        public bool foodinwall(Wall w)
+        public bool Foodinsnake(Snake w)
+        {
+            foreach (Point p in w.body)
+            {
+                if (location.x == p.x && location.y == p.y)
+                    return true;
+            }
+            return false;
+        }
+        public bool Foodinwall(Wall w)
         {
             foreach (Point p in w.body)
             {
@@ -42,7 +54,29 @@ namespace Snake
             Console.SetCursorPosition(location.x, location.y);
             Console.Write(sign);
         }
-      
+        public void Save()
+        {
+            string fileName = "";
+           
+                fileName = @"C:\HW\food.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(GetType());
+
+            xs.Serialize(fs, this);
+            fs.Close();
+        }
+        public void Resume()
+        {
+            string fileName = "";
+           
+                fileName = @"C:\HW\food.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(GetType());
+    
+               Program.food = xs.Deserialize(fs) as Food;
+            fs.Close();
+        }
+
     }
 
 }

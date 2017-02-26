@@ -6,34 +6,18 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 
+using System.Xml.Serialization;
+
+
 namespace Snake
 {
-    class Wall
+    public class Wall
     {
-        /* public char sign;
-         public ConsoleColor color;
-        public List<Point> body;
-
-         public Wall()
-         {
-             sign = '*';
-             color = ConsoleColor.Green;
-             body = new List<Point>();
-             StreamReader sr = new StreamReader("input.txt");
-             int n = int.Parse(sr.ReadLine());
-             for (int i = 0; i < n; i++)
-             {
-                 string line = sr.ReadLine();
-                 for (int j = 0; j < line.Length; j++)
-                     if (line[j] == '*')
-                         body.Add(new Point(j, i));
-             }
-             sr.Close();
-         }*/
+       
         public char sign;
         public ConsoleColor color;
         public List<Point> body;
-
+        public Wall() { }
         public Wall(int x)
         {
             sign = '*';
@@ -52,6 +36,28 @@ namespace Snake
                         body.Add(new Point(j, i));
             }
             sr.Close();
+        }
+        public void Save()
+        {
+            string fileName = "";
+
+            fileName = @"C:\HW\wall.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+
+            xs.Serialize(fs, this);
+            fs.Close();
+        }
+        public void Resume()
+        {
+            string fileName = "";
+
+            fileName = @"C:\HW\wall.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Wall));
+
+            Program.wall = xs.Deserialize(fs) as Wall;
+            fs.Close();
         }
 
 

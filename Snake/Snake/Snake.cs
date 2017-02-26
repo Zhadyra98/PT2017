@@ -4,21 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.IO;
+using System.Xml.Serialization;
+
 
 namespace Snake
 {
 
-    class Snake
+  public class Snake 
     {
        
         public char sign;
         public ConsoleColor color;
         public List<Point> body;
-       
-        public Snake()
+        public Snake() { }
+       /* public Snake()
         {
             SetSnake();
-            }
+            }*/
         
             public void SetSnake ()
         {
@@ -33,12 +36,18 @@ namespace Snake
         {
             // if (cnt % 10 == 0)
             // body.Add(new Point(0, 0)); 
-            foreach (Point p in body)
+            for (int i = 0; i < body.Count; i++)
+            {
+                Console.SetCursorPosition(body[i].x, body[i].y);
+
+                Console.Write(' ');
+            }
+          /*  foreach (Point p in body)
             {
                 Console.SetCursorPosition(p.x, p.y);
 
                 Console.Write(' ');
-            }
+            }*/
           
             for (int i = body.Count - 1; i >= 1; i--)
             {
@@ -94,18 +103,48 @@ namespace Snake
             }
             return false;
         }
+      /*  public void Save()
+        {
 
+       
+            string fileName = "";
 
+            fileName = @"C:\HW\snake.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Snake));
+
+            xs.Serialize(fs, Program.snake);
+            fs.Close();
+        }*/
+    
+        public void Resume()
+        {
+            string fileName = "";
+
+            fileName = @"C:\HW\snake.xml";
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Snake));
+
+            Program.snake = xs.Deserialize(fs) as Snake;
+            fs.Close();
+        }
+        
         public void Draw()
         {
-       
+
             Console.ForegroundColor = color;
-        foreach (Point p in body)
+            for (int i = 0; i < body.Count; i++)
+            {
+                Console.SetCursorPosition(body[i].x, body[i].y);
+
+                Console.Write(sign);
+            } 
+       /* foreach (Point p in body)
         {
             Console.SetCursorPosition(p.x, p.y);
                
             Console.Write(sign);
-        }
+        }*/
 
         }
     }

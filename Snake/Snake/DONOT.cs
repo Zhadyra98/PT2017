@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    class Donsotmove
+  public  class Donsotmove
     {
         public bool Donotmove(Snake sn)
         {
@@ -53,6 +53,7 @@ namespace Snake
                     return true;
             }
             return false;
+
 
         }
     }
