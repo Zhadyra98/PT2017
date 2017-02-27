@@ -8,7 +8,9 @@ using System.Xml.Serialization;
 
 namespace Snake
 {
- public   class Food
+    [Serializable]
+
+    public class Food
     {
         public Point location;
         public ConsoleColor color = ConsoleColor.Red;
@@ -24,8 +26,9 @@ namespace Snake
         public void SetRandomPosition()
         {
            
-            int x = new Random().Next(1, 69);
-            int y = new Random().Next(1, 34);
+            int x = new Random().Next(1, 59);
+            int y = new Random().Next(1, 24);
+            
             location = new Point(x, y);
         }
         public bool Foodinsnake(Snake w)

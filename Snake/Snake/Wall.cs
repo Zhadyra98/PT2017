@@ -11,6 +11,8 @@ using System.Xml.Serialization;
 
 namespace Snake
 {
+    [Serializable]
+
     public class Wall
     {
        

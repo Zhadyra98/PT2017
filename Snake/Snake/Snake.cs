@@ -11,7 +11,8 @@ using System.Xml.Serialization;
 namespace Snake
 {
 
-  public class Snake 
+[Serializable]  
+public class Snake 
     {
        
         public char sign;
@@ -103,19 +104,19 @@ namespace Snake
             }
             return false;
         }
-      /*  public void Save()
+        public void Save()
         {
 
-       
+
             string fileName = "";
 
             fileName = @"C:\HW\snake.xml";
             FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(typeof(Snake));
 
-            xs.Serialize(fs, Program.snake);
+            xs.Serialize(fs, this);
             fs.Close();
-        }*/
+        }
     
         public void Resume()
         {

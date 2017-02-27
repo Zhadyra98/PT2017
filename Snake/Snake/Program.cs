@@ -9,29 +9,22 @@ using System.Xml.Serialization;
 
 namespace Snake
 {
-   public class Program
+ 
+    public class Program
     {
         public static bool Gameover = false;
       public static int d = 5;
         public static int u = 0;
         public static int i = 0;
         public static int e = 0;
-        public static int k =150;
+        public static int k =500;
         public static Snake snake;
         public static Wall wall;
         public static Food food;
-        public static Donsotmove dont;
-        public static void Save()
-        {
-
-            FileStream fs = new FileStream(@"C: \HW\snake.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(typeof(Snake));
-            xs.Serialize(fs, snake);
-            fs.Close();
-        }
+    
         static void Save1()
         {
-            Save();
+            snake.Save();
             food.Save();
             wall.Save();
         }
@@ -85,13 +78,13 @@ namespace Snake
                         food.SetRandomPosition();
                 }
 
-                if (snake.body.Count == 6)
+                if (snake.body.Count == 2)
                 {
                     Console.Clear();
                     i++;
                     snake.SetSnake();
                     k = k - 100;
-
+                    d = 5;
 
                     e = i + 1;
                 }
@@ -126,142 +119,84 @@ namespace Snake
             snake.SetSnake();
            
             food = new Food(1);
-            dont = new Donsotmove();
+          
            
 
 
         Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(10, 20);
             Console.WriteLine("Would You like to play? " + "Then, press Enter to start");
-            ConsoleKeyInfo button = Console.ReadKey();
+            ConsoleKeyInfo buton = Console.ReadKey();
 
-            if (button.Key == ConsoleKey.Enter)
+            if (buton.Key == ConsoleKey.Enter)
             {
                 Thread thread = new Thread(Move);
                 thread.Start();
             }
 
 
+             Stack<ConsoleKeyInfo> ba = new Stack<ConsoleKeyInfo>();
 
-
-            while (!Gameover==true)
+            if (ba.Count == 0)
             {
-              
-              
-                    ConsoleKeyInfo btn = Console.ReadKey();
-                if (btn.Key == ConsoleKey.F2)
-                    Save1();
-                if (btn.Key == ConsoleKey.F3)
-                    Resume();
+                ba.Push(Console.ReadKey());
+                if (ba.Peek().Key == ConsoleKey.UpArrow )
+                    d = 2;
 
-           /*     if (dont.Donotmove(snake))
-                        switch (btn.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-                                snake.Move(0, -1);
+                if (ba.Peek().Key == ConsoleKey.DownArrow)
+                    d = 3;
 
-                                break;
-                            case ConsoleKey.DownArrow:
-                                snake.Move(0, 1);
-                                break;
-                            case ConsoleKey.RightArrow:
-                                snake.Move(1, 0);
-                                break;
-                            case ConsoleKey.LeftArrow:
+                if (ba.Peek().Key == ConsoleKey.LeftArrow)
+                    d = 1;
 
-                                break;
-                            case ConsoleKey.Escape:
-                                break;
+                if (ba.Peek().Key == ConsoleKey.RightArrow)
+                    d = 0;
+            }
+                while (!Gameover == true)
+                             {
+                                 if (ba.Count() > 0)
+                                 {
+                                     ConsoleKeyInfo button = Console.ReadKey();
+                  
+                    if (button.Key == ConsoleKey.F2)
+                        Save1();
+                    if (button.Key == ConsoleKey.F3)
+                        Resume();
 
+                    if (ba.Peek().Key == ConsoleKey.UpArrow && button.Key == ConsoleKey.DownArrow ||
+                                     ba.Peek().Key == ConsoleKey.LeftArrow && button.Key == ConsoleKey.RightArrow ||
+                                     ba.Peek().Key == ConsoleKey.DownArrow && button.Key == ConsoleKey.UpArrow ||
+                                     ba.Peek().Key == ConsoleKey.RightArrow && button.Key == ConsoleKey.LeftArrow)
+                                     {
 
-                        }
-                    else if (dont.Donotmove1(snake))
-                        switch (btn.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-                                d = 2;
+                                     }
 
-                                break;
-                            case ConsoleKey.DownArrow:
-                                d = 3;
-                                break;
-                            case ConsoleKey.RightArrow:
+                                     else
+                                     {
+                                         ba.Push(button);
+                                         if (button.Key == ConsoleKey.UpArrow && snake.body[0].y != 1)
+                                          d=2;
 
-                                break;
-                            case ConsoleKey.LeftArrow:
-                                d = 1;
-                                break;
-                            case ConsoleKey.Escape:
-                                break;
+                                         if (button.Key == ConsoleKey.DownArrow && snake.body[0].y != 27)
+                                             d=3;
 
+                                         if (button.Key == ConsoleKey.LeftArrow && snake.body[0].x != 1)
+                                    d=1;
 
-                        }
-                    else if (dont.Donotmove2(snake))
-                        switch (btn.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-
-                                break;
-                            case ConsoleKey.DownArrow:
-                                d = 3;
-                                break;
-                            case ConsoleKey.RightArrow:
-                                d = 0;
-                                break;
-                            case ConsoleKey.LeftArrow:
-                                d = 1;
-                                break;
-                            case ConsoleKey.Escape:
-                                break;
+                                         if (button.Key == ConsoleKey.RightArrow && snake.body[0].x != 118)
+                                            d=0;
 
 
-                        }
-                    else if (dont.Donotmove3(snake))
-                    {
-                        switch (btn.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-                                d = 2;
 
-                                break;
-                            case ConsoleKey.DownArrow:
+                                     }
+                                 }
 
-                                break;
-                            case ConsoleKey.RightArrow:
-                                d = 0;
-                                break;
-                            case ConsoleKey.LeftArrow:
-                                d = 1;
-                                break;
-                            case ConsoleKey.Escape:
-                                break;
-
-                        }
-                    }
-                    else
-                    */
-
-                    switch (btn.Key)
-                    {
-                        case ConsoleKey.UpArrow:
-                            d = 2;
-                            break;
-                        case ConsoleKey.DownArrow:
-                            d = 3;
-                            break;
-                        case ConsoleKey.RightArrow:
-                            d = 0;
-                            break;
-                        case ConsoleKey.LeftArrow:
-                            d = 1;
-                            break;
-                        case ConsoleKey.Escape:
-                            break;
+                             }
 
 
-                    }
-                       
+       
 
+        
 
 
 
@@ -270,4 +205,4 @@ namespace Snake
           
         }
     }
-}
+
