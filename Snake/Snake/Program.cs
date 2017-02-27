@@ -13,7 +13,7 @@ namespace Snake
     public class Program
     {
         public static bool Gameover = false;
-      public static int d = 5;
+        public static int d = 5;
         public static int u = 0;
         public static int i = 0;
         public static int e = 0;
@@ -21,7 +21,6 @@ namespace Snake
         public static Snake snake;
         public static Wall wall;
         public static Food food;
-    
         static void Save1()
         {
             snake.Save();
@@ -50,17 +49,14 @@ namespace Snake
                     snake.Move(0, 1);
                 if (d == 5)
                     snake.Move(0, 0);
-                if (d == 4)
-                    break;
+                //if (d == 4)
+                    //break;
                 if (Gameover = snake.CrushWithWall(wall) ||
                  snake.CrushWithBody(snake))
                     break;
-            snake.Draw();
-  
+                snake.Draw();
                 wall.Draw();
                 food.Draw();
-               
-               
                 if (snake.CanEat(food))
                 {
                     food.SetRandomPosition();
@@ -78,52 +74,39 @@ namespace Snake
                         food.SetRandomPosition();
                 }
 
-                if (snake.body.Count == 2)
+                if (snake.body.Count == 6)
                 {
                     Console.Clear();
                     i++;
                     snake.SetSnake();
                     k = k - 100;
                     d = 5;
-
-                    e = i + 1;
                 }
+                e = i + 1;
                 Console.SetCursorPosition(10, 20);
                 Console.WriteLine("LEVEL:" + e);
                 Console.SetCursorPosition(10,22);
                 Console.WriteLine("POINT:" + u);
-                
                 Thread.Sleep(k);
-      
-            
-            }
-
-
+        }
             Console.Clear();
             Console.SetCursorPosition(10, 10);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("GAME OVER!");
             Console.ReadKey();
-
-
-
-
-        }
-        static void Main(string[] args)
+          }
+        
+          
+          
+          
+          static void Main(string[] args)
         {
             Console.SetWindowSize(70, 35);
-
             Console.CursorVisible = false;
-          
-             snake = new Snake();
+            snake = new Snake();
             snake.SetSnake();
-           
             food = new Food(1);
-          
-           
-
-
-        Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(10, 20);
             Console.WriteLine("Would You like to play? " + "Then, press Enter to start");
             ConsoleKeyInfo buton = Console.ReadKey();
@@ -136,8 +119,7 @@ namespace Snake
 
 
              Stack<ConsoleKeyInfo> ba = new Stack<ConsoleKeyInfo>();
-
-            if (ba.Count == 0)
+             if (ba.Count == 0)
             {
                 ba.Push(Console.ReadKey());
                 if (ba.Peek().Key == ConsoleKey.UpArrow )
@@ -152,12 +134,12 @@ namespace Snake
                 if (ba.Peek().Key == ConsoleKey.RightArrow)
                     d = 0;
             }
-                while (!Gameover == true)
-                             {
-                                 if (ba.Count() > 0)
-                                 {
-                                     ConsoleKeyInfo button = Console.ReadKey();
-                  
+            while (!Gameover == true)
+            {
+                if (ba.Count() > 0)
+                {
+                    ConsoleKeyInfo button = Console.ReadKey();
+
                     if (button.Key == ConsoleKey.F2)
                         Save1();
                     if (button.Key == ConsoleKey.F3)
@@ -167,42 +149,29 @@ namespace Snake
                                      ba.Peek().Key == ConsoleKey.LeftArrow && button.Key == ConsoleKey.RightArrow ||
                                      ba.Peek().Key == ConsoleKey.DownArrow && button.Key == ConsoleKey.UpArrow ||
                                      ba.Peek().Key == ConsoleKey.RightArrow && button.Key == ConsoleKey.LeftArrow)
-                                     {
+                    {
 
-                                     }
+                    }
 
-                                     else
-                                     {
-                                         ba.Push(button);
-                                         if (button.Key == ConsoleKey.UpArrow && snake.body[0].y != 1)
-                                          d=2;
+                    else
+                    {
+                        ba.Push(button);
+                        if (button.Key == ConsoleKey.UpArrow)
+                            d = 2;
 
-                                         if (button.Key == ConsoleKey.DownArrow && snake.body[0].y != 27)
-                                             d=3;
+                        if (button.Key == ConsoleKey.DownArrow)
+                            d = 3;
 
-                                         if (button.Key == ConsoleKey.LeftArrow && snake.body[0].x != 1)
-                                    d=1;
+                        if (button.Key == ConsoleKey.LeftArrow)
+                            d = 1;
 
-                                         if (button.Key == ConsoleKey.RightArrow && snake.body[0].x != 118)
-                                            d=0;
+                        if (button.Key == ConsoleKey.RightArrow)
+                            d = 0;
+                    }
+                }
 
-
-
-                                     }
-                                 }
-
-                             }
-
-
-       
-
-        
-
-
-
-
-    }
-          
+            }
         }
-    }
+     }
+  }
 
