@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Snake
-{
+namespace Zmaika
+{ 
     [Serializable]
 
     public class Food
@@ -26,10 +26,9 @@ namespace Snake
         public void SetRandomPosition()
         {
            
-            int x = new Random().Next(1, 59);
-            int y = new Random().Next(1, 24);
-            
-            location = new Point(x, y);
+            int x = new Random().Next(8, 43);
+            int y = new Random().Next(2, 19);
+           location = new Point(x, y);
         }
         public bool Foodinsnake(Snake w)
         {
@@ -59,22 +58,19 @@ namespace Snake
         }
         public void Save()
         {
-            string fileName = "";
            
-                fileName = @"C:\HW\food.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(GetType());
-
+           
+               
+            FileStream fs = new FileStream(@"C:\HW\food.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Food));
             xs.Serialize(fs, this);
             fs.Close();
         }
         public void Resume()
         {
-            string fileName = "";
-           
-                fileName = @"C:\HW\food.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(GetType());
+            
+            FileStream fs = new FileStream(@"C:\HW\food.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Food));
     
                Program.food = xs.Deserialize(fs) as Food;
             fs.Close();

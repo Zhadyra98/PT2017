@@ -9,13 +9,13 @@ using System.Collections;
 using System.Xml.Serialization;
 
 
-namespace Snake
+namespace Zmaika
 {
     [Serializable]
 
     public class Wall
     {
-       
+
         public char sign;
         public ConsoleColor color;
         public List<Point> body;
@@ -25,26 +25,41 @@ namespace Snake
             sign = '*';
             color = ConsoleColor.Green;
             body = new List<Point>();
-            DirectoryInfo fs = new DirectoryInfo(@"c:\HW\folder");
-            FileInfo[] files = fs.GetFiles();
-            StreamReader sr = new StreamReader(files[x].FullName);
 
-            int n = int.Parse(sr.ReadLine());
-            for (int i = 0; i < n; i++)
+            DirectoryInfo fs = new DirectoryInfo(@"c:\HW\folder1");
+            FileInfo[] files = fs.GetFiles();
+            if (x < 4)
             {
-                string line = sr.ReadLine();
-                for (int j = 0; j < line.Length; j++)
-                    if (line[j] == '*')
-                        body.Add(new Point(j, i));
+                StreamReader sr = new StreamReader(files[x].FullName);
+                int n = int.Parse(sr.ReadLine());
+                for (int i = 0; i < n; i++)
+                {
+                    string line = sr.ReadLine();
+                    for (int j = 0; j < line.Length; j++)
+                        if (line[j] == '#')
+                            body.Add(new Point(j, i));
+                }
+                sr.Close();
             }
-            sr.Close();
+            else if (x == 4)
+            {
+
+                Console.SetCursorPosition(10, 20);
+                Console.WriteLine("LEVEL:" + Program.e); 
+                Console.SetCursorPosition(10, 22);
+
+                Console.WriteLine("POINT:" + Program.u);
+                Console.SetCursorPosition(40, 40);
+                Console.WriteLine("You have won! Flawles victory!");
+            }
+
         }
+
         public void Save()
         {
-            string fileName = "";
-
-            fileName = @"C:\HW\wall.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+           
+                
+            FileStream fs = new FileStream(@"C:\HW\wall.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(typeof(Wall));
 
             xs.Serialize(fs, this);
@@ -52,16 +67,19 @@ namespace Snake
         }
         public void Resume()
         {
-            string fileName = "";
+           
 
-            fileName = @"C:\HW\wall.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream fs = new FileStream(@"C:\HW\wall.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             XmlSerializer xs = new XmlSerializer(typeof(Wall));
 
             Program.wall = xs.Deserialize(fs) as Wall;
             fs.Close();
         }
-
+      //  public void Drawborder() { 
+       // for ()
+        
+        
+        //}
 
         public void Draw()
         {
@@ -76,3 +94,4 @@ namespace Snake
         }
     }
 }
+

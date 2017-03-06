@@ -8,58 +8,57 @@ using System.IO;
 using System.Xml.Serialization;
 
 
-namespace Snake
+namespace Zmaika
 {
 
-[Serializable]  
-public class Snake 
+   
+    public class Snake
     {
-       
+
         public char sign;
         public ConsoleColor color;
-        public List<Point> body;
+        public List<Point> body ;
         public Snake() { }
-       /* public Snake()
+        /* public Snake()
+         {
+             SetSnake();
+             }*/
+
+        public void SetSnake()
         {
-            SetSnake();
-            }*/
-        
-            public void SetSnake ()
-        {
-         
-            sign = 'o';
+
+            sign = '0';
             color = ConsoleColor.Yellow;
             body = new List<Point>();
-            body.Add(new Point(30, 40));
-         
+            body.Add(new Point(10, 10));
         }
         public void Move(int dx, int dy)
         {
             // if (cnt % 10 == 0)
             // body.Add(new Point(0, 0)); 
-            for (int i = 0; i < body.Count; i++)
+           for (int i = 0; i < body.Count; i++)
             {
                 Console.SetCursorPosition(body[i].x, body[i].y);
 
                 Console.Write(' ');
             }
-          /*  foreach (Point p in body)
-            {
-                Console.SetCursorPosition(p.x, p.y);
+            /*  foreach (Point p in body)
+              {
+                  Console.SetCursorPosition(p.x, p.y);
 
-                Console.Write(' ');
-            }*/
-          
+                  Console.Write(' ');
+              }*/
+
             for (int i = body.Count - 1; i >= 1; i--)
             {
                 body[i].x = body[i - 1].x;
                 body[i].y = body[i - 1].y;
             }
-                
-               
-          
-            body[0].x =body[0].x+dx;
-            body[0].y = body[0].y+dy;
+
+
+
+            body[0].x = body[0].x + dx;
+            body[0].y = body[0].y + dy;
 
             if (body[0].x > Console.WindowWidth - 10)
                 body[0].x = 1;
@@ -72,7 +71,7 @@ public class Snake
                 body[0].y = Console.WindowHeight - 10;
 
 
-          //  cnt++;
+            //  cnt++;
         }
         public bool CanEat(Food f)
         {
@@ -80,7 +79,7 @@ public class Snake
             {
                 body.Add(new Point(f.location.x, f.location.y));
                 Console.SetCursorPosition(f.location.x, f.location.y);
-                Console.WriteLine(' '); // new Point(body[0].x, body[0].y)
+                // new Point(body[0].x, body[0].y)
                 return true;
             }
             return false;
@@ -90,7 +89,7 @@ public class Snake
             foreach (Point p in w.body)
             {
                 if (body[0].x == p.x && body[0].y == p.y)
-                    return true;
+                   return true;
             }
             return false;
         }
@@ -107,45 +106,65 @@ public class Snake
         public void Save()
         {
 
+            try {
 
-            string fileName = "";
+              
 
-            fileName = @"C:\HW\snake.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(typeof(Snake));
 
-            xs.Serialize(fs, this);
-            fs.Close();
+                FileStream fs = new FileStream(@"C:\HW\snake.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                XmlSerializer xs = new XmlSerializer(typeof(Snake));
+                xs.Serialize(fs, this);
+                fs.Close(); }
+                catch (Exception e)
+            { Console.WriteLine(e);
+                Console.ReadKey();
+              }
+          
         }
-    
+
         public void Resume()
         {
-            string fileName = "";
+            try
+            {
+              
+                FileStream fs = new FileStream(@"C:\HW\snake.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                XmlSerializer xs = new XmlSerializer(typeof(Snake));
 
-            fileName = @"C:\HW\snake.xml";
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            XmlSerializer xs = new XmlSerializer(typeof(Snake));
-
-            Program.snake = xs.Deserialize(fs) as Snake;
-            fs.Close();
+                Program.snake = xs.Deserialize(fs) as Snake;
+                fs.Close();
+            }
+            catch (Exception e)
+            {
+                Console.Clear();
+                Console.WriteLine(e);
+                Console.ReadKey();
+            }
         }
-        
+
+
+
+
         public void Draw()
         {
 
-            Console.ForegroundColor = color;
-            for (int i = 0; i < body.Count; i++)
+            Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(body[0].x, body[0].y);
+
+                Console.Write("☻");
+          
+            for (int i = 1; i < body.Count; i++)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.SetCursorPosition(body[i].x, body[i].y);
 
                 Console.Write(sign);
-            } 
-       /* foreach (Point p in body)
-        {
-            Console.SetCursorPosition(p.x, p.y);
-               
-            Console.Write(sign);
-        }*/
+            }
+            /* foreach (Point p in body)
+             {
+                 Console.SetCursorPosition(p.x, p.y);
+
+                 Console.Write(sign);
+             }*/
 
         }
     }
