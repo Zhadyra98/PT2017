@@ -7,3 +7,9 @@ C:\Users\Пользователь\Desktop\PT2017\Дробь\Complex number\obj\D
 C:\Users\Пользователь\Desktop\PT2017\Дробь\Complex number\bin\Debug\ConsoleApplication3.exe
 C:\Users\Пользователь\Desktop\PT2017\Дробь\Complex number\bin\Debug\ConsoleApplication3.pdb
 C:\Users\Пользователь\Desktop\PT2017\Дробь\Complex number\obj\Debug\Complex number.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\bin\Debug\ConsoleApplication3.exe.config
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\obj\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\obj\Debug\ConsoleApplication3.pdb
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\obj\Debug\Complex number.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\bin\Debug\ConsoleApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017 — копия\Дробь\Complex number\bin\Debug\ConsoleApplication3.pdb

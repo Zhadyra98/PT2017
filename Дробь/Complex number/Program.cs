@@ -3,80 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
 
-namespace Complex
+namespace complex
 {
     class Program
+
     {
-        class Complex //create a class 
+        public static Complex sub = new Complex(0, 0); // created class and declared atributes as zeros
+        public static Complex sum = new Complex(0, 0); // created class and declared atributes as zeros
+        public static Complex div = new Complex(0, 0); // created class and declared atributes as zeros
+        public static Complex mul = new Complex(0, 0); // created class and declared atributes as zeros
+        static void resume(Complex c)
         {
-            //added data
-            public int x;
-            public int y;
-            public Complex(int x, int y) //make a constructor
-            {
-                //initialize class attributes
-                this.x = x;
-                this.y = y;
-            }
-            //rewrite function ToString()
-            public override string ToString()
-            {
-                return x + "/" + y;
-            }
-            //function to find gcd of two complex numbers
-            static int gcd(int x, int y)
-            {
-                if (x == 0)
-                    return y;
-                return gcd(y % x, x);
-            }
-            //provide overload a binary operator +
-
-            public static Complex operator +(Complex a, Complex b)
-            {
-                Complex c = new Complex(a.x * b.y + a.y * b.x/gcd(a.x * b.y + a.y * b.x, a.y * b.y), a.y * b.y/ gcd(a.x * b.y + a.y * b.x, a.y * b.y));
-
-
-            return c;
-            }
-
-
-
-
-
-
         
-            //provide overload a binary operator -
-            public static Complex operator -(Complex x, Complex y)
-            {
-                //changed the purpose of  -  by adding new class 
-                Complex c = new Complex((x.x * y.y - y.x * x.y)/ gcd(x.x * y.y + y.x * x.y, x.y * y.y), x.y * y.y/ gcd(x.x * y.y + y.x * x.y, x.y * y.y));
-                return c;
-            }
-            //provide overload a binary operator /
-            public static Complex operator /(Complex x, Complex y)
-            {
-                //changed the purpose of  /  by adding new class 
-                Complex c = new Complex(x.x * y.y/gcd(x.x * y.y, x.y * y.x), x.y * y.x/ gcd(x.x * y.y, x.y * y.x));
-                return c;
-            }
-            //provide overload a binary operator *
-            public static Complex operator *(Complex x, Complex y)
-            {
-                //changed the purpose of  *  by adding new class 
-                Complex c = new Complex(x.x * y.x/ gcd(x.x * y.x, x.y * y.y), x.y * y.y / gcd(x.x * y.x, x.y * y.y));
-
-                return c;
-            }
-            static void Main(string[] args) // function to split complex numbers
-            {
-                string s = Console.ReadLine();
+            FileStream fs = new FileStream("", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            XmlSerializer xs = new XmlSerializer(typeof(Complex));
+            c = xs.Deserialize(fs) as Complex;
+            fs.Close();
+        }
+        static void Main(string[] args) // function to split complex numbers
+        {
+            
+            string s = Console.ReadLine();
                 string[] arr = s.Split(); // breaks a complex numbers into parts until space: 1/2 3/4
-                Complex sum = new Complex(0, 0); // created class and declared atributes as zeros
-                foreach (string ss in arr) // instead of for we use foreach to work with string array
-                {
-                    string[] t = ss.Split('/'); // breaks a complex numbers into parts until "/": 1 2 3  4
+               foreach (string ss in arr) // instead of for we use foreach to work with string array
+            {
+             
+                string[] t = ss.Split('/'); // breaks a complex numbers into parts until "/": 1 2 3  4
                     Complex p = new Complex(int.Parse(t[0]), int.Parse(t[1]));
                     if (sum.x == 0 & sum.y == 0) // because we have declared class as zeros, first condition is always true
                     {
@@ -88,7 +43,7 @@ namespace Complex
                     }
                 }
 
-                Complex sub = new Complex(0, 0); // created class and declared atributes as zeros
+          
                 foreach (string ss in arr)
                 {
                     string[] t = ss.Split('/');// breaks a complex numbers into parts until "/": 1 2 3  4
@@ -136,17 +91,36 @@ namespace Complex
                     }
 
                 }
-                // coz we have changed Tostring(), now it shows atributs of complex number as an complex number
-                Console.WriteLine(sum); 
-                Console.WriteLine(sub); 
-                Console.WriteLine(div); 
-                Console.WriteLine(mul); 
+            // coz we have changed Tostring(), now it shows atributs of complex number as an complex number
+            
+           
+            while (true)
+            {
+                ConsoleKeyInfo btn = Console.ReadKey();
+                if (btn.Key == ConsoleKey.F2)
+                {
+                 
+                    sub.save();
+                    div.save();
+                    mul.save();
+                    sum.save();
 
-
-                Console.ReadKey();
-
-
+                }
+                if (btn.Key == ConsoleKey.F3)
+                {
+                    resume(sum);
+                    resume(sub);
+                    resume(div);
+                    resume(mul);
+                   
+                    Console.ReadKey();
+                }
             }
+
+
+
+
+
         }
     }
-}
+    }
