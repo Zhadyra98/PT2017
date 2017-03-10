@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{70475EC5-ABBB-4312-9AAE-35486322DE02}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Desktop\PT2017\Point.cs">
+    <Files>
+      <File FileName="Traphiclight\Program.cs" Line="17" Column="6" />
+      <File FileName="Traphiclight\Square.cs" Line="44" Column="21" />
+      <File FileName="..\..\..\Desktop\PT2017\Point.cs" Line="14" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Traphiclight PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

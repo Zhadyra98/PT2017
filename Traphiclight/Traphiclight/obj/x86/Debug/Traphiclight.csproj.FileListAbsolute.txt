@@ -1,0 +1,4 @@
+C:\Users\Пользователь\Documents\Projects\Traphiclight\Traphiclight\bin\Debug\Traphiclight.exe
+C:\Users\Пользователь\Documents\Projects\Traphiclight\Traphiclight\bin\Debug\Traphiclight.pdb
+C:\Users\Пользователь\Documents\Projects\Traphiclight\Traphiclight\obj\x86\Debug\Traphiclight.exe
+C:\Users\Пользователь\Documents\Projects\Traphiclight\Traphiclight\obj\x86\Debug\Traphiclight.pdb
