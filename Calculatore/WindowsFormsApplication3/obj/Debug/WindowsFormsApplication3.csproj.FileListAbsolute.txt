@@ -25,6 +25,3 @@ C:\Users\Пользователь\Desktop\Week9G2 — копия\WindowsFormsApp
 C:\Users\Пользователь\Desktop\Week9G2 — копия\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Form1.resources
 C:\Users\Пользователь\Desktop\Week9G2 — копия\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Properties.Resources.resources
 C:\Users\Пользователь\Desktop\Week9G2 — копия\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
-C:\Users\Пользователь\Desktop\PT2017\Calculator\WindowsFormsApplication3\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe.config
-C:\Users\Пользователь\Desktop\PT2017\Calculator\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.exe
-C:\Users\Пользователь\Desktop\PT2017\Calculator\WindowsFormsApplication3\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.pdb

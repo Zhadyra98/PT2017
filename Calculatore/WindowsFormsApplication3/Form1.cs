@@ -11,18 +11,72 @@ using System.Windows.Forms;
 namespace WindowsFormsApplication3
 {
     public partial class Form1 : Form
-    { public static bool percpressed = false;
+
+    {
+        public  void DisableButtons()
+        {
+            B1.Enabled = false;
+            B2.Enabled = false;
+            B3.Enabled = false;
+            B4.Enabled = false;
+            B5.Enabled = false;
+            B6.Enabled = false;
+            B7.Enabled = false;
+            B8.Enabled = false;
+            B9.Enabled = false;
+            B13.Enabled = false;
+            B17.Enabled = false;
+            B21.Enabled = false;
+            B25.Enabled = false;
+            B26.Enabled = false;
+            B28.Enabled = false;
+
+        }
+       
+          public void EnableButtons()
+        {if (saved != 0)
+            {
+                B1.Enabled = true;
+                B2.Enabled = true;
+            }
+          else if (saved == 0)
+            {
+                B1.Enabled = false;
+                B2.Enabled = false;
+            }
+            B3.Enabled = true;
+            B4.Enabled = true;
+            B5.Enabled = true;
+            B6.Enabled = true;
+            B7.Enabled = true;
+            B8.Enabled = true;
+            B9.Enabled = true;
+            B13.Enabled = true;
+            B17.Enabled = true;
+            B21.Enabled = true;
+            B25.Enabled = true;
+            B26.Enabled = true;
+            B28.Enabled = true;
+
+       
+
+    }
+
+    public static bool percpressed = false;
         public static bool numisnum = true;
         public static int memplus = 0;
         public static int memminus = 0;
         public static double percent = 0;
         public static bool equalpressed = false;
         public static double saved = 0;
-        public static double saved1 = 0;
+        public static double AnPlusCount = 0; // when we press plus two or more times textbox should show us the result of operation
         public static int newlinecnt = 0;
         public static int pluscnt = 0;
+        public static int NumberStored = 0;
+        public static double Number;
+        public static double Number1 = 0;
         public static int sctn = 0; // if there is number saved in memory MR button will show nothing
-        public static int ctn; //counter for operations
+        public static int ctn=0; //counter for operations
         public static int cnt=0; // counter created to add/substract/divide/multiplicate second number to the result
         public static int ccnt = 0;//comma counter
         public static Calculator calculator;
@@ -32,6 +86,7 @@ namespace WindowsFormsApplication3
             InitializeComponent();
             calculator = new Calculator();
             display.Text = "0";
+            EnableButtons();
         }
 
         public void number_click(object sender, EventArgs e)
@@ -40,19 +95,22 @@ namespace WindowsFormsApplication3
             if (calculator.operation == Calculator.Operation.NONE ||
                 calculator.operation == Calculator.Operation.NUMBER)
             {
+               
                 if (display.Text == "0" && btn.Text == ",")
                     display.Text += btn.Text;
+                else if (display.Text != "0" && equalpressed || display.Text == "Cannot divide by zero")
+                {
+                    EnableButtons();
+                    display.Text = btn.Text;
+                    equalpressed = false;
+                }
                 else if (display.Text != "0" && newlinecnt == 1)
                 {
                     newlinecnt = 0;
                     display.Text = btn.Text;
                 }
-                else if (display.Text != "0" && equalpressed)
-                {
-                   
-                    display.Text = btn.Text;
-                    equalpressed = false;
-                }
+               
+             
                 else if (display.Text != "0")
                     display.Text += btn.Text;
                 else if (display.Text == "0")
@@ -67,6 +125,10 @@ namespace WindowsFormsApplication3
                ctn = 1;
                ccnt = 0;
                 cnt = 0;
+                pluscnt=2;
+               
+              
+               
             }
           
             else if (calculator.operation == Calculator.Operation.SAVE)
@@ -105,55 +167,89 @@ namespace WindowsFormsApplication3
 
         private void button12_Click(object sender, EventArgs e)
         {
+            if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount>=2 )
+            {
+                Number += Number1;
+                display.Text = (Number).ToString();
+               
+        
+              
+            }
+          
+            else
+            { if (display.Text == "Cannot divide by zero")
+            {
+                display.Text = "0";
+                EnableButtons();
+            }
             if (numisnum) { 
                 if (cnt == 0)
                     calculator.saveSecondNumber(display.Text);
                 else
                     calculator.saveFirstNumber(display.Text);
 
-                newlinecnt = 1;
+               
 
-                switch (ctn)
-                {
-                    case 1:
-                        display.Text = calculator.getResultPlus().ToString();
-                        cnt++;
-                        equalpressed = true;
-                        break;
-                    case 2:
-                        display.Text = calculator.getResultMinus().ToString();
-                        cnt++;
-                        equalpressed = true;
-                        break;
-                    case 3:
-                        display.Text = calculator.getResultDivided().ToString();
-                        cnt++;
-                        equalpressed = true;
-                        break;
-                    case 4:
-                        display.Text = calculator.getResultTimes().ToString();
-                        cnt++;
-                        equalpressed = true;
-                        break;
+                    switch (ctn)
+                    {
+                        case 1:
+                            display.Text = calculator.getResultPlus().ToString();
+                            cnt++;
+                            equalpressed = true;
+                            break;
+                        case 2:
+                            display.Text = calculator.getResultMinus().ToString();
+                            cnt++;
+                            equalpressed = true;
+                            break;
+                        case 3:
+                            if (calculator.secondNumber == 0)
+                            {
+                                display.Text = "Cannot divide by zero";
+                                DisableButtons();
+                            }
+                            else
+                            {
+                                display.Text = calculator.getResultDivided().ToString();
+                                cnt++;
+                                equalpressed = true;
+                            }
+                            break;
+                        case 4:
+                            display.Text = calculator.getResultTimes().ToString();
+                            cnt++;
+                            equalpressed = true;
+                            break;
 
 
-
+                    }
+                 
 
                 }
             }
+            newlinecnt = 1;
 
-         
+
         }
        
 
         private void button11_Click(object sender, EventArgs e)
         {
             calculator.operation = Calculator.Operation.PLUS;
-            pluscnt++;
-            if (pluscnt == 2)
+            if (pluscnt  == 2)
             {
-              display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
+
+                display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
             }
+            pluscnt = 1;
+            if (AnPlusCount==1)
+            {
+                Number1 = (double.Parse(display.Text));
+                Number =(double.Parse(display.Text));
+            }
+            
+           
+            AnPlusCount++;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -168,6 +264,11 @@ namespace WindowsFormsApplication3
 
         private void button19_Click(object sender, EventArgs e)
         {
+            if (display.Text == "Cannot divide by zero")
+            {
+                display.Text = "0";
+                EnableButtons();
+            }
             if (calculator.firstNumber != 0)
             {
                 display.Text = "0";
@@ -242,11 +343,23 @@ namespace WindowsFormsApplication3
 
         private void button21_Click(object sender, EventArgs e)
         {
-            display.Text = (1 / (Convert.ToDouble(display.Text))).ToString();
+           
+            if (display.Text == "0")
+            {
+                display.Text = "Cannot divide by zero";
+                DisableButtons();
+            }
+           else 
+           display.Text = (1 / (Convert.ToDouble(display.Text))).ToString();
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            if (display.Text == "Cannot divide by zero")
+            {
+                display.Text = "0";
+                EnableButtons();
+            }
             display.Text = "0";
             ccnt = 0;
             calculator.firstNumber = 0;
@@ -290,13 +403,18 @@ namespace WindowsFormsApplication3
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (display.Text.Length == 0 ||display.Text=="0") 
+            if (display.Text == "Cannot divide by zero")
+            {
+                display.Text = "0";
+                EnableButtons();
+            }
+            if (display.Text.Length == 1||display.Text == "" ||display.Text=="0") 
             {
                 display.Text = "0";
                   ccnt = 0;
-                 }
+                 } 
             
-            else if (display.Text.Length > 0)
+            else if (display.Text.Length > 1)
             { 
             display.Text = display.Text.Substring(0, display.Text.Length - 1);
                 if (display.Text.Contains(",") != true)
@@ -310,12 +428,14 @@ namespace WindowsFormsApplication3
         private void button25_Click(object sender, EventArgs e)
         {
             saved = 0;
+             EnableButtons();
         }
 
         public void button27_Click(object sender, EventArgs e)
         {
             calculator.operation = Calculator.Operation.SAVE;
             saved = double.Parse(display.Text);
+            EnableButtons();
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -334,65 +454,5 @@ namespace WindowsFormsApplication3
         {
             display.Text =( double.Parse(display.Text) *(-1)).ToString();
         }
-
-
-
-
-
-
-
-
-
-        /*
-        private void button1_Click(object sender, EventArgs e)
-        {
-            display.Text += "1";
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            display.Text += "0";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            display.Text += "2";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            display.Text += "3";
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            display.Text += "4";
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            display.Text += "5";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            display.Text += "6";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            display.Text += "7";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            display.Text += "8";
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            display.Text += "9";
-        }
-         */
-    }
+ }
 }
