@@ -92,6 +92,15 @@ namespace WindowsFormsApplication3
         public void number_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
+            if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
+            {
+                Number = 0;
+                Number1 = 0;
+                AnPlusCount = 0;
+                display.Text = btn.Text;
+                newlinecnt = 0;
+                pluscnt = 0;
+            }
             if (calculator.operation == Calculator.Operation.NONE ||
                 calculator.operation == Calculator.Operation.NUMBER)
             {
@@ -117,15 +126,15 @@ namespace WindowsFormsApplication3
                     display.Text = btn.Text;
                 
             }
-            else if (calculator.operation == Calculator.Operation.PLUS )
+            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount==1 )
             {
                calculator.saveFirstNumber(display.Text);
-                numisnum = true;
+               numisnum = true;
                display.Text = btn.Text;
                ctn = 1;
                ccnt = 0;
-                cnt = 0;
-                pluscnt=2;
+               cnt = 0;
+               pluscnt=2;
                
               
                
@@ -171,9 +180,6 @@ namespace WindowsFormsApplication3
             {
                 Number += Number1;
                 display.Text = (Number).ToString();
-               
-        
-              
             }
           
             else
@@ -228,7 +234,7 @@ namespace WindowsFormsApplication3
                 }
             }
             newlinecnt = 1;
-
+            pluscnt = 0;
 
         }
        
@@ -238,19 +244,20 @@ namespace WindowsFormsApplication3
             calculator.operation = Calculator.Operation.PLUS;
             if (pluscnt  == 2)
             {
-
                 display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
             }
             pluscnt = 1;
             if (AnPlusCount==1)
             {
                 Number1 = (double.Parse(display.Text));
-                Number =(double.Parse(display.Text));
+                Number =  (double.Parse(display.Text));
             }
             
-           
-            AnPlusCount++;
-        }
+           if (AnPlusCount==0)
+             AnPlusCount=1;
+           else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
+             AnPlusCount = 2;
+           }
 
         private void Form1_Load(object sender, EventArgs e)
         {
