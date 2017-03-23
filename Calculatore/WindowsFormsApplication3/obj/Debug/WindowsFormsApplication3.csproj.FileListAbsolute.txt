@@ -28,3 +28,18 @@ C:\Users\Пользователь\Desktop\Week9G2 — копия\WindowsFormsApp
 C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe.config
 C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.exe
 C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.pdb
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Form1.resources
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Properties.Resources.resources
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe
+C:\Users\Пользователь\Desktop\PT2017\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.pdb
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe.config
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.exe
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.pdb
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.exe
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\bin\Debug\WindowsFormsApplication3.pdb
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Form1.resources
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.Properties.Resources.resources
+C:\Users\Пользователь\Desktop\Week9G2 — копия\Calculatore\WindowsFormsApplication3\obj\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache

@@ -13,7 +13,7 @@ namespace WindowsFormsApplication3
     public partial class Form1 : Form
 
     {
-        public  void DisableButtons()
+        public void DisableButtons()
         {
             B1.Enabled = false;
             B2.Enabled = false;
@@ -32,14 +32,14 @@ namespace WindowsFormsApplication3
             B28.Enabled = false;
 
         }
-       
-          public void EnableButtons()
-        {if (saved != 0)
+
+        public void EnableButtons()
+        { if (saved != 0)
             {
                 B1.Enabled = true;
                 B2.Enabled = true;
             }
-          else if (saved == 0)
+            else if (saved == 0)
             {
                 B1.Enabled = false;
                 B2.Enabled = false;
@@ -58,12 +58,19 @@ namespace WindowsFormsApplication3
             B26.Enabled = true;
             B28.Enabled = true;
 
-       
 
-    }
 
-    public static bool percpressed = false;
-        public static bool numisnum = true;
+        }
+        public void CannotDivideByZero() {
+            if (display.Text == "Cannot divide by zero")
+            {
+                display.Text = "0";
+                EnableButtons();
+            }
+        }
+
+        public static bool percpressed = false;
+        public static bool numisnum = false;
         public static int memplus = 0;
         public static int memminus = 0;
         public static double percent = 0;
@@ -76,13 +83,13 @@ namespace WindowsFormsApplication3
         public static double Number;
         public static double Number1 = 0;
         public static int sctn = 0; // if there is number saved in memory MR button will show nothing
-        public static int ctn=0; //counter for operations
-        public static int cnt=0; // counter created to add/substract/divide/multiplicate second number to the result
+        public static int ctn = 0; //counter for operations
+        public static int cnt = 0; // counter created to add/substract/divide/multiplicate second number to the result
         public static int ccnt = 0;//comma counter
         public static Calculator calculator;
         public Form1()
         {
-            
+
             InitializeComponent();
             calculator = new Calculator();
             display.Text = "0";
@@ -92,10 +99,25 @@ namespace WindowsFormsApplication3
         public void number_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
+
+            if (cnt != 0 && equalpressed && numisnum) {
+                CannotDivideByZero();
+                display.Text = "0";
+                ccnt = 0;
+                cnt = 0;
+                calculator.firstNumber = 0;
+                calculator.secondNumber = 0;
+                calculator.operation = Calculator.Operation.NONE;
+                equalpressed = false;
+                AnPlusCount = 0;
+            }
+            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
             {
+                equalpressed = false;
                 Number = 0;
                 Number1 = 0;
+                calculator.firstNumber = 0;
+                calculator.secondNumber = 0;
                 AnPlusCount = 0;
                 display.Text = btn.Text;
                 newlinecnt = 0;
@@ -104,8 +126,10 @@ namespace WindowsFormsApplication3
             if (calculator.operation == Calculator.Operation.NONE ||
                 calculator.operation == Calculator.Operation.NUMBER)
             {
-               
-                if (display.Text == "0" && btn.Text == ",")
+                if (display.Text.Length == 13)
+                { }
+
+                else if (display.Text == "0" && btn.Text == ",")
                     display.Text += btn.Text;
                 else if (display.Text != "0" && equalpressed || display.Text == "Cannot divide by zero")
                 {
@@ -118,31 +142,31 @@ namespace WindowsFormsApplication3
                     newlinecnt = 0;
                     display.Text = btn.Text;
                 }
-               
-             
+
+
                 else if (display.Text != "0")
                     display.Text += btn.Text;
                 else if (display.Text == "0")
                     display.Text = btn.Text;
-                
+
             }
-            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount==1 )
+            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
             {
-               calculator.saveFirstNumber(display.Text);
-               numisnum = true;
-               display.Text = btn.Text;
-               ctn = 1;
-               ccnt = 0;
-               cnt = 0;
-               pluscnt=2;
-               
-              
-               
+                calculator.saveFirstNumber(display.Text);
+                numisnum = true;
+                display.Text = btn.Text;
+                ctn = 1;
+                ccnt = 0;
+                cnt = 0;
+                pluscnt = 2;
+
+
+
             }
-          
+
             else if (calculator.operation == Calculator.Operation.SAVE)
             {
-               
+
                 display.Text = btn.Text;
                 sctn = 1;
             }
@@ -150,25 +174,31 @@ namespace WindowsFormsApplication3
             {
                 calculator.saveFirstNumber(display.Text);
                 display.Text = btn.Text;
+                numisnum = true;
                 ctn = 2;
                 ccnt = 0;
                 cnt = 0;
+                pluscnt = 2;
             }
             else if (calculator.operation == Calculator.Operation.DIVIDED)
             {
                 calculator.saveFirstNumber(display.Text);
                 display.Text = btn.Text;
                 ctn = 3;
+                numisnum = true;
                 ccnt = 0;
                 cnt = 0;
+                pluscnt = 2;
             }
             else if (calculator.operation == Calculator.Operation.TIMES)
             {
                 calculator.saveFirstNumber(display.Text);
                 display.Text = btn.Text;
                 ctn = 4;
+                numisnum = true;
                 ccnt = 0;
                 cnt = 0;
+                pluscnt = 2;
             }
 
             calculator.operation = Calculator.Operation.NUMBER;
@@ -176,25 +206,31 @@ namespace WindowsFormsApplication3
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount>=2 )
+            if (display.Text == "Cannot divide by zero" )
+            {
+                EnableButtons();
+                display.Text = "0";
+                newlinecnt = 1;
+                pluscnt = 0;
+            }
+           if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
             {
                 Number += Number1;
                 display.Text = (Number).ToString();
+                newlinecnt = 1;
+                pluscnt = 0;
             }
-          
-            else
-            { if (display.Text == "Cannot divide by zero")
-            {
-                display.Text = "0";
-                EnableButtons();
-            }
-            if (numisnum) { 
-                if (cnt == 0)
-                    calculator.saveSecondNumber(display.Text);
-                else
-                    calculator.saveFirstNumber(display.Text);
 
-               
+            else
+            { 
+
+                if (numisnum) {
+                    if (cnt == 0)
+                        calculator.saveSecondNumber(display.Text);
+                    else
+                        calculator.saveFirstNumber(display.Text);
+
+
 
                     switch (ctn)
                     {
@@ -213,6 +249,9 @@ namespace WindowsFormsApplication3
                             {
                                 display.Text = "Cannot divide by zero";
                                 DisableButtons();
+                                equalpressed = true;
+                                calculator.secondNumber = 1;
+                                cnt++;
                             }
                             else
                             {
@@ -229,35 +268,42 @@ namespace WindowsFormsApplication3
 
 
                     }
-                 
 
+                    newlinecnt = 1;
+                    pluscnt = 0;
                 }
             }
-            newlinecnt = 1;
-            pluscnt = 0;
+            
+           
 
         }
-       
+
 
         private void button11_Click(object sender, EventArgs e)
         {
-            calculator.operation = Calculator.Operation.PLUS;
-            if (pluscnt  == 2)
+
+            if (calculator.operation == Calculator.Operation.NONE || calculator.operation == Calculator.Operation.NUMBER)
             {
-                display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
+                calculator.operation = Calculator.Operation.PLUS;
+                if (pluscnt == 2)
+                {
+                    display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
+                }
+                pluscnt = 1;
+                if (AnPlusCount == 1)
+                {
+                    Number1 = (double.Parse(display.Text));
+                    Number = (double.Parse(display.Text));
+                }
+
+                if (AnPlusCount == 0)
+                    AnPlusCount = 1;
+                else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
+                    AnPlusCount = 2;
+
             }
-            pluscnt = 1;
-            if (AnPlusCount==1)
-            {
-                Number1 = (double.Parse(display.Text));
-                Number =  (double.Parse(display.Text));
-            }
-            
-           if (AnPlusCount==0)
-             AnPlusCount=1;
-           else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
-             AnPlusCount = 2;
-           }
+            else { } } 
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -271,11 +317,7 @@ namespace WindowsFormsApplication3
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (display.Text == "Cannot divide by zero")
-            {
-                display.Text = "0";
-                EnableButtons();
-            }
+            CannotDivideByZero();
             if (calculator.firstNumber != 0)
             {
                 display.Text = "0";
@@ -362,15 +404,15 @@ namespace WindowsFormsApplication3
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (display.Text == "Cannot divide by zero")
-            {
-                display.Text = "0";
-                EnableButtons();
-            }
+            CannotDivideByZero();
             display.Text = "0";
             ccnt = 0;
+            cnt = 0;
             calculator.firstNumber = 0;
             calculator.secondNumber = 0;
+            calculator.operation = Calculator.Operation.NONE;
+            equalpressed = false;
+            AnPlusCount = 0;
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -410,11 +452,7 @@ namespace WindowsFormsApplication3
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (display.Text == "Cannot divide by zero")
-            {
-                display.Text = "0";
-                EnableButtons();
-            }
+            CannotDivideByZero();
             if (display.Text.Length == 1||display.Text == "" ||display.Text=="0") 
             {
                 display.Text = "0";
@@ -422,9 +460,9 @@ namespace WindowsFormsApplication3
                  } 
             
             else if (display.Text.Length > 1)
-            { 
-            display.Text = display.Text.Substring(0, display.Text.Length - 1);
-                if (display.Text.Contains(",") != true)
+            {
+                display.Text = calculator.DeleteLastCharacter(display.Text);
+                if (display.Text.Contains(",") == false)
                 {
                     ccnt = 0; 
                 }
