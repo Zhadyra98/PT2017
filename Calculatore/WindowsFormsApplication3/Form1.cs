@@ -34,12 +34,12 @@ namespace WindowsFormsApplication3
         }
 
         public void EnableButtons()
-        { if (saved != 0)
+        { if (SavedNumber != 0)
             {
                 B1.Enabled = true;
                 B2.Enabled = true;
             }
-            else if (saved == 0)
+            else if (SavedNumber == 0)
             {
                 B1.Enabled = false;
                 B2.Enabled = false;
@@ -69,24 +69,15 @@ namespace WindowsFormsApplication3
             }
         }
 
-        public static bool percpressed = false;
-        public static bool numisnum = false;
-        public static int memplus = 0;
-        public static int memminus = 0;
-        public static double percent = 0;
-        public static bool equalpressed = false;
-        public static double saved = 0;
-        public static double AnPlusCount = 0; // when we press plus two or more times textbox should show us the result of operation
-        public static int newlinecnt = 0;
-        public static int pluscnt = 0;
-        public static int NumberStored = 0;
-        public static double Number;
-        public static double Number1 = 0;
-        public static int sctn = 0; // if there is number saved in memory MR button will show nothing
-        public static int ctn = 0; //counter for operations
-        public static int cnt = 0; // counter created to add/substract/divide/multiplicate second number to the result
-        public static int ccnt = 0;//comma counter
+        // public static bool FirstNumberIsNotEmpty=false;
         public static Calculator calculator;
+        public static bool FirstNumberIsNotEmpty = false;
+        public static double PercentNumber = 0;
+        public static double SavedNumber = 0;
+        public static int CounterForOperation = 0;
+        public static int OperationPressedAmount = 0;
+        public static bool NoOperationSign = false;
+        public static bool NumberPressed = false;
         public Form1()
         {
 
@@ -99,106 +90,55 @@ namespace WindowsFormsApplication3
         public void number_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-
-            if (cnt != 0 && equalpressed && numisnum) {
-                CannotDivideByZero();
-                display.Text = "0";
-                ccnt = 0;
-                cnt = 0;
-                calculator.firstNumber = 0;
-                calculator.secondNumber = 0;
-                calculator.operation = Calculator.Operation.NONE;
-                equalpressed = false;
-                AnPlusCount = 0;
-            }
-            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
+            if (calculator.operation == Calculator.Operation.EQUAL)
             {
-                equalpressed = false;
-                Number = 0;
-                Number1 = 0;
-                calculator.firstNumber = 0;
-                calculator.secondNumber = 0;
-                AnPlusCount = 0;
-                display.Text = btn.Text;
-                newlinecnt = 0;
-                pluscnt = 0;
+                calculator.operation = Calculator.Operation.NUMBER;
+                display.Text = "";
+                calculator.firstNumber = calculator.secondNumber;
+                NoOperationSign = true;
+                NumberPressed = true;
             }
+
             if (calculator.operation == Calculator.Operation.NONE ||
                 calculator.operation == Calculator.Operation.NUMBER)
             {
-                if (display.Text.Length == 13)
-                { }
-
-                else if (display.Text == "0" && btn.Text == ",")
-                    display.Text += btn.Text;
-                else if (display.Text != "0" && equalpressed || display.Text == "Cannot divide by zero")
+                if (display.Text == "0")
                 {
-                    EnableButtons();
-                    display.Text = btn.Text;
-                    equalpressed = false;
+                display.Text = btn.Text;
                 }
-                else if (display.Text != "0" && newlinecnt == 1)
-                {
-                    newlinecnt = 0;
-                    display.Text = btn.Text;
-                }
-
-
                 else if (display.Text != "0")
-                    display.Text += btn.Text;
-                else if (display.Text == "0")
-                    display.Text = btn.Text;
-
+                {
+                display.Text += btn.Text;
+                }
             }
-            else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
+                else if (calculator.operation == Calculator.Operation.PLUS ||
+                     calculator.operation == Calculator.Operation.MINUS ||
+                     calculator.operation == Calculator.Operation.TIMES ||
+                     calculator.operation == Calculator.Operation.DIVIDED)
             {
                 calculator.saveFirstNumber(display.Text);
-                numisnum = true;
                 display.Text = btn.Text;
-                ctn = 1;
-                ccnt = 0;
-                cnt = 0;
-                pluscnt = 2;
-
-
-
+                switch (calculator.operation) {
+                    case Calculator.Operation.PLUS:
+                        CounterForOperation = 1;
+                        break;
+                    case Calculator.Operation.MINUS:
+                        CounterForOperation = 2;
+                        break;
+                    case Calculator.Operation.TIMES:
+                        CounterForOperation = 4;
+                        break;
+                    case Calculator.Operation.DIVIDED:
+                        CounterForOperation = 3;
+                        break;
+                }
+                OperationPressedAmount = 2;
+                FirstNumberIsNotEmpty = true;
             }
 
             else if (calculator.operation == Calculator.Operation.SAVE)
             {
-
                 display.Text = btn.Text;
-                sctn = 1;
-            }
-            else if (calculator.operation == Calculator.Operation.MINUS)
-            {
-                calculator.saveFirstNumber(display.Text);
-                display.Text = btn.Text;
-                numisnum = true;
-                ctn = 2;
-                ccnt = 0;
-                cnt = 0;
-                pluscnt = 2;
-            }
-            else if (calculator.operation == Calculator.Operation.DIVIDED)
-            {
-                calculator.saveFirstNumber(display.Text);
-                display.Text = btn.Text;
-                ctn = 3;
-                numisnum = true;
-                ccnt = 0;
-                cnt = 0;
-                pluscnt = 2;
-            }
-            else if (calculator.operation == Calculator.Operation.TIMES)
-            {
-                calculator.saveFirstNumber(display.Text);
-                display.Text = btn.Text;
-                ctn = 4;
-                numisnum = true;
-                ccnt = 0;
-                cnt = 0;
-                pluscnt = 2;
             }
 
             calculator.operation = Calculator.Operation.NUMBER;
@@ -206,133 +146,149 @@ namespace WindowsFormsApplication3
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (display.Text == "Cannot divide by zero" )
+            OperationPressedAmount = 0;
+            if (display.Text == "Cannot divide by zero")
             {
-                EnableButtons();
-                display.Text = "0";
-                newlinecnt = 1;
-                pluscnt = 0;
+                CannotDivideByZero();
+                CounterForOperation = 0;// counter created to add/substract/divide/multiplicate second number to the result
+              
+                OperationPressedAmount = 0;
+                NoOperationSign = false;
+                NumberPressed = false;
+                calculator.operation = Calculator.Operation.NONE;
             }
-           if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount >= 2)
-            {
-                Number += Number1;
-                display.Text = (Number).ToString();
-                newlinecnt = 1;
-                pluscnt = 0;
-            }
-
-            else
-            { 
-
-                if (numisnum) {
-                    if (cnt == 0)
-                        calculator.saveSecondNumber(display.Text);
-                    else
-                        calculator.saveFirstNumber(display.Text);
-
-
-
-                    switch (ctn)
+           
+            else{
+                if (FirstNumberIsNotEmpty) {
+                    if (calculator.operation == Calculator.Operation.NUMBER || calculator.operation == Calculator.Operation.SAVE)
+                      {   
+                         if (CounterForOperation == 2 && NumberPressed == false)
+                            calculator.saveSecondNumber((double.Parse(display.Text)*(-1)).ToString());
+                         else if (CounterForOperation == 2 && NumberPressed)
+                          { 
+                          calculator.saveSecondNumber(double.Parse(display.Text).ToString());
+                           NumberPressed = false;
+                          }
+                          else if (CounterForOperation == 3 && NumberPressed == false)
+                            {
+                               if (display.Text == "0")
+                            {
+                                calculator.secondNumber = 0;
+                                DisableButtons();
+                            }
+                                  else if (display.Text != "Cannot divide by zero" || display.Text != "0")
+                                calculator.saveSecondNumber((1 / double.Parse(display.Text)).ToString());
+                        }
+                        else if (CounterForOperation == 3 && NumberPressed)
+                        {
+                            calculator.saveSecondNumber(double.Parse(display.Text).ToString());
+                            NumberPressed = false;
+                        }
+                        else
+                            calculator.saveSecondNumber(display.Text);}
+                    else if (calculator.operation == Calculator.Operation.EQUAL)
+                    { if (NoOperationSign == false)
+                            calculator.saveFirstNumber(display.Text);
+                        else
+                            calculator.saveSecondNumber(display.Text);
+                    }
+                    switch (CounterForOperation)
                     {
                         case 1:
                             display.Text = calculator.getResultPlus().ToString();
-                            cnt++;
-                            equalpressed = true;
                             break;
                         case 2:
-                            display.Text = calculator.getResultMinus().ToString();
-                            cnt++;
-                            equalpressed = true;
+                            display.Text = calculator.getResultPlus().ToString();
                             break;
                         case 3:
                             if (calculator.secondNumber == 0)
                             {
                                 display.Text = "Cannot divide by zero";
-                                DisableButtons();
-                                equalpressed = true;
                                 calculator.secondNumber = 1;
-                                cnt++;
                             }
                             else
-                            {
-                                display.Text = calculator.getResultDivided().ToString();
-                                cnt++;
-                                equalpressed = true;
-                            }
+                                display.Text = calculator.getResultTimes().ToString();
                             break;
                         case 4:
                             display.Text = calculator.getResultTimes().ToString();
-                            cnt++;
-                            equalpressed = true;
                             break;
 
 
                     }
-
-                    newlinecnt = 1;
-                    pluscnt = 0;
+                    calculator.operation = Calculator.Operation.EQUAL;
                 }
             }
-            
-           
 
         }
 
 
+
+
         private void button11_Click(object sender, EventArgs e)
         {
-
-            if (calculator.operation == Calculator.Operation.NONE || calculator.operation == Calculator.Operation.NUMBER)
+            Button btn = sender as Button;
+              switch (btn.Text)
             {
-                calculator.operation = Calculator.Operation.PLUS;
-                if (pluscnt == 2)
+                case "+":
+                    calculator.operation = Calculator.Operation.PLUS;
+                    break;
+                case "-":
+                    calculator.operation = Calculator.Operation.MINUS;
+                    break;
+                case "/":
+                    calculator.operation = Calculator.Operation.DIVIDED;
+                    break;
+                case "*":
+                    calculator.operation = Calculator.Operation.TIMES;
+                    break;
+            }
+                if (OperationPressedAmount == 2)
                 {
-                    display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
-                }
-                pluscnt = 1;
-                if (AnPlusCount == 1)
-                {
-                    Number1 = (double.Parse(display.Text));
-                    Number = (double.Parse(display.Text));
-                }
-
-                if (AnPlusCount == 0)
-                    AnPlusCount = 1;
-                else if (calculator.operation == Calculator.Operation.PLUS && AnPlusCount == 1)
-                    AnPlusCount = 2;
+                    switch (calculator.operation)
+                    {
+                        case Calculator.Operation.DIVIDED:
+                            display.Text = (calculator.firstNumber / double.Parse(display.Text)).ToString();
+                            break;
+                        case Calculator.Operation.MINUS:
+                            display.Text = ((-1)*double.Parse(display.Text) + calculator.firstNumber).ToString();
+                            break;
+                        case Calculator.Operation.TIMES:
+                            display.Text = (double.Parse(display.Text) * calculator.firstNumber).ToString();
+                            break;
+                        case Calculator.Operation.PLUS:
+                            display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
+                            break;
+                    }
+                    OperationPressedAmount = 0;
+                    calculator.saveFirstNumber(display.Text);
+                    
 
             }
-            else { } } 
-      
+            NoOperationSign = false;
+        }
+         
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-            calculator.operation = Calculator.Operation.MINUS;
-        }
+       
 
         private void button19_Click(object sender, EventArgs e)
         {
             CannotDivideByZero();
-            if (calculator.firstNumber != 0)
+            if (FirstNumberIsNotEmpty)
             {
                 display.Text = "0";
                 calculator.secondNumber = 0;
-                ccnt = 0;
             }
             else
             {
                 display.Text = "0";
                 calculator.firstNumber = 0;
-                ccnt = 0;
             }
-
-           
-        }
+           }
 
         private void display_TextChanged(object sender, EventArgs e)
         {
@@ -341,53 +297,29 @@ namespace WindowsFormsApplication3
 
         private void button30_Click(object sender, EventArgs e)
         {
+            display.Text = (SavedNumber).ToString();
+            calculator.operation = Calculator.Operation.SAVE;
+            FirstNumberIsNotEmpty = true;
 
-            /*  if (sctn == 0)
-              {
-
-                      }
-
-              else
-              {*/
-        
-              
-                display.Text = (saved).ToString();
-     
-            // }
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             display.Text = Math.Sqrt(double.Parse(display.Text)).ToString();
-            equalpressed = true;
+           
         }
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-            calculator.operation = Calculator.Operation.TIMES;
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            calculator.operation = Calculator.Operation.DIVIDED;
-        }
+     
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if (ccnt == 0)
-            {
+           if (!display.Text.Contains(','))
                 display.Text += ",";
-                ccnt=1;
-            }
-            else { }
-           
-            
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             display.Text = Math.Pow(double.Parse(display.Text),2).ToString();
-            equalpressed = true;
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -406,39 +338,34 @@ namespace WindowsFormsApplication3
         {
             CannotDivideByZero();
             display.Text = "0";
-            ccnt = 0;
-            cnt = 0;
             calculator.firstNumber = 0;
             calculator.secondNumber = 0;
             calculator.operation = Calculator.Operation.NONE;
-            equalpressed = false;
-            AnPlusCount = 0;
-        }
+           }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            if (equalpressed!=true)
+            if (calculator.operation == Calculator.Operation.NUMBER)
             {
-                percent = double.Parse(display.Text) / 100;
-                calculator.saveSecondNumber((double.Parse(display.Text) / 100).ToString());
-             
-                percpressed = true;
+                PercentNumber = double.Parse(display.Text) / 100;
+                calculator.saveSecondNumber((PercentNumber).ToString());
+                display.Text = (PercentNumber * calculator.firstNumber).ToString();
             }
-            else
+            else 
             {
-                switch (ctn)
+                switch (CounterForOperation)
                 {
                     case 1:
-                        display.Text = (double.Parse(display.Text) * (1 + percent)).ToString();
+                        display.Text = (double.Parse(display.Text) * (1 + PercentNumber)).ToString();
                         break;
                     case 2:
-                        display.Text = (double.Parse(display.Text) * (1 - percent)).ToString();
+                        display.Text = (double.Parse(display.Text) * (1 - PercentNumber)).ToString();
                         break;
                     case 3:
-                        display.Text = (double.Parse(display.Text) * (1 / percent)).ToString();
+                        display.Text = (double.Parse(display.Text) * (1 / PercentNumber)).ToString();
                         break;
                     case 4:
-                        display.Text = (double.Parse(display.Text) * (1 * percent)).ToString();
+                        display.Text = (double.Parse(display.Text) * (1 * PercentNumber)).ToString();
                         break;
                 }
             }
@@ -453,46 +380,39 @@ namespace WindowsFormsApplication3
         private void button14_Click(object sender, EventArgs e)
         {
             CannotDivideByZero();
-            if (display.Text.Length == 1||display.Text == "" ||display.Text=="0") 
+            if (display.Text.Length == 1 )
             {
                 display.Text = "0";
-                  ccnt = 0;
-                 } 
-            
+             }
             else if (display.Text.Length > 1)
             {
                 display.Text = calculator.DeleteLastCharacter(display.Text);
-                if (display.Text.Contains(",") == false)
-                {
-                    ccnt = 0; 
-                }
             }
-            
+            else { }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            saved = 0;
-             EnableButtons();
+            display.Text = "0";
+            SavedNumber = 0;
+            EnableButtons();
         }
 
         public void button27_Click(object sender, EventArgs e)
         {
-            calculator.operation = Calculator.Operation.SAVE;
-            saved = double.Parse(display.Text);
-            EnableButtons();
+         calculator.operation = Calculator.Operation.SAVE;
+         SavedNumber = double.Parse(display.Text);
+         EnableButtons();
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-           
-        saved -= double.Parse(display.Text);
+         SavedNumber -= double.Parse(display.Text);
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-         
-        saved += double.Parse(display.Text);
+         SavedNumber += double.Parse(display.Text);
         }
 
         private void button20_Click(object sender, EventArgs e)

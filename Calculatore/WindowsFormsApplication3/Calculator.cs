@@ -50,6 +50,7 @@ namespace WindowsFormsApplication3
 
         public double getResultPlus()
         {
+           
             return firstNumber + secondNumber;
         }
         public double getResultMinus()
