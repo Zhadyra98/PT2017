@@ -22,7 +22,7 @@ namespace WindowsFormsApplication3
             MREAD
         };
         public Operation operation;
-        public double firstNumber, secondNumber;
+        public double firstNumber, secondNumber, thirdnumber;
 
         public Calculator()
         {
@@ -30,6 +30,7 @@ namespace WindowsFormsApplication3
 
             firstNumber = 0;
             secondNumber = 0;
+            thirdnumber = 0;
         }
 
         public void saveFirstNumber(string s)

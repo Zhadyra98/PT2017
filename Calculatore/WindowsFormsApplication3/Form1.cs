@@ -78,6 +78,7 @@ namespace WindowsFormsApplication3
         public static int OperationPressedAmount = 0;
         public static bool NoOperationSign = false;
         public static bool NumberPressed = false;
+        public static int CounterForEqualsAndNumbersAmount = 0;
         public Form1()
         {
 
@@ -92,23 +93,40 @@ namespace WindowsFormsApplication3
             Button btn = sender as Button;
             if (calculator.operation == Calculator.Operation.EQUAL)
             {
-                calculator.operation = Calculator.Operation.NUMBER;
-                display.Text = "";
-                calculator.firstNumber = calculator.secondNumber;
-                NoOperationSign = true;
-                NumberPressed = true;
-            }
-
-            if (calculator.operation == Calculator.Operation.NONE ||
-                calculator.operation == Calculator.Operation.NUMBER)
-            {
-                if (display.Text == "0")
+                if (CounterForEqualsAndNumbersAmount == 0)
                 {
-                display.Text = btn.Text;
+                    NoOperationSign = true;
+                    NumberPressed = true;
+                    calculator.operation = Calculator.Operation.NUMBER;
+                    calculator.firstNumber = calculator.secondNumber;
+                    display.Text = "";
+                    CounterForEqualsAndNumbersAmount = 1;
                 }
-                else if (display.Text != "0")
+                else {
+                    NoOperationSign = true;
+                    NumberPressed = false;
+                    calculator.operation = Calculator.Operation.EQUAL;
+                    display.Text = "";
+                    display.Text += btn.Text;
+                  }
+                 }
+             if (calculator.operation == Calculator.Operation.NONE ||
+                calculator.operation == Calculator.Operation.NUMBER )
+            { 
+            if (display.Text.Length >= 23)
+              { }
+                else
                 {
-                display.Text += btn.Text;
+                    if (display.Text == "0")
+                    {
+                        display.Text = btn.Text;
+                    }
+                    else if (display.Text != "0")
+                    {
+                        display.Text += btn.Text;
+                       
+                    }
+                    
                 }
             }
                 else if (calculator.operation == Calculator.Operation.PLUS ||
@@ -189,7 +207,7 @@ namespace WindowsFormsApplication3
                     else if (calculator.operation == Calculator.Operation.EQUAL)
                     { if (NoOperationSign == false)
                             calculator.saveFirstNumber(display.Text);
-                        else
+                        else 
                             calculator.saveSecondNumber(display.Text);
                     }
                     switch (CounterForOperation)
@@ -265,7 +283,9 @@ namespace WindowsFormsApplication3
 
             }
             NoOperationSign = false;
-        }
+            NumberPressed = false;
+            CounterForEqualsAndNumbersAmount = 0;
+                   }
          
 
         private void Form1_Load(object sender, EventArgs e)
