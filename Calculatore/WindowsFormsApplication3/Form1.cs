@@ -317,8 +317,19 @@ namespace WindowsFormsApplication3
 
         private void button30_Click(object sender, EventArgs e)
         {
+            calculator.saveFirstNumber(display.Text);
             display.Text = (SavedNumber).ToString();
-            calculator.operation = Calculator.Operation.SAVE;
+            switch (calculator.operation)
+            {
+                case Calculator.Operation.PLUS:
+                    CounterForOperation = 1;
+                    break;
+                case Calculator.Operation.MINUS:
+                    CounterForOperation = 2;
+                    break;
+            }
+                    calculator.operation = Calculator.Operation.SAVE;
+
             FirstNumberIsNotEmpty = true;
 
         }
@@ -358,6 +369,13 @@ namespace WindowsFormsApplication3
         {
             CannotDivideByZero();
             display.Text = "0";
+            FirstNumberIsNotEmpty = false;
+            PercentNumber = 0;
+            CounterForOperation = 0;
+            OperationPressedAmount = 0;
+            NoOperationSign = false;
+            NumberPressed = false;
+            CounterForEqualsAndNumbersAmount = 0;
             calculator.firstNumber = 0;
             calculator.secondNumber = 0;
             calculator.operation = Calculator.Operation.NONE;
