@@ -75,6 +75,7 @@ namespace WindowsFormsApplication3
         public static double PercentNumber = 0;
         public static double SavedNumber = 0;
         public static int CounterForOperation = 0;
+        public static int SecondCounterForOperation = 0;
         public static int OperationPressedAmount = 0;
         public static bool NoOperationSign = false;
         public static bool NumberPressed = false;
@@ -91,6 +92,10 @@ namespace WindowsFormsApplication3
         public void number_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
+            if (display.Text == "Cannot divide by zero")
+            {
+                EnableButtons();
+            }
             if (calculator.operation == Calculator.Operation.EQUAL)
             {
                 if (CounterForEqualsAndNumbersAmount == 0)
@@ -134,7 +139,7 @@ namespace WindowsFormsApplication3
                      calculator.operation == Calculator.Operation.TIMES ||
                      calculator.operation == Calculator.Operation.DIVIDED)
             {
-                calculator.saveFirstNumber(display.Text);
+              //  calculator.saveFirstNumber(display.Text);
                 display.Text = btn.Text;
                 switch (calculator.operation) {
                     case Calculator.Operation.PLUS:
@@ -151,7 +156,7 @@ namespace WindowsFormsApplication3
                         break;
                 }
                 OperationPressedAmount = 2;
-                FirstNumberIsNotEmpty = true;
+              //  FirstNumberIsNotEmpty = true;
             }
 
             else if (calculator.operation == Calculator.Operation.SAVE)
@@ -178,7 +183,12 @@ namespace WindowsFormsApplication3
            
             else{
                 if (FirstNumberIsNotEmpty) {
-                    if (calculator.operation == Calculator.Operation.NUMBER || calculator.operation == Calculator.Operation.SAVE)
+                    if (calculator.operation == Calculator.Operation.NUMBER || calculator.operation == Calculator.Operation.SAVE
+                    || calculator.operation == Calculator.Operation.PLUS ||
+                     calculator.operation == Calculator.Operation.MINUS ||
+                     calculator.operation == Calculator.Operation.TIMES ||
+                     calculator.operation == Calculator.Operation.DIVIDED)
+
                       {   
                          if (CounterForOperation == 2 && NumberPressed == false)
                             calculator.saveSecondNumber((double.Parse(display.Text)*(-1)).ToString());
@@ -245,47 +255,80 @@ namespace WindowsFormsApplication3
         private void button11_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-              switch (btn.Text)
+            if (OperationPressedAmount == 0)
             {
-                case "+":
-                    calculator.operation = Calculator.Operation.PLUS;
-                    break;
-                case "-":
-                    calculator.operation = Calculator.Operation.MINUS;
-                    break;
-                case "/":
-                    calculator.operation = Calculator.Operation.DIVIDED;
-                    break;
-                case "*":
-                    calculator.operation = Calculator.Operation.TIMES;
-                    break;
-            }
-                if (OperationPressedAmount == 2)
+                switch (btn.Text)
                 {
-                    switch (calculator.operation)
+                    case "+":
+                        calculator.operation = Calculator.Operation.PLUS;
+                        CounterForOperation = 1;
+                        SecondCounterForOperation = 1;
+                        break;
+                    case "-":
+                        calculator.operation = Calculator.Operation.MINUS;
+                        CounterForOperation = 2;
+                        SecondCounterForOperation = 2;
+                        break;
+                    case "÷":
+                        calculator.operation = Calculator.Operation.DIVIDED;
+                        CounterForOperation = 3;
+                        SecondCounterForOperation = 3;
+                        break;
+                    case "*":
+                        calculator.operation = Calculator.Operation.TIMES;
+                        CounterForOperation = 4;
+                        SecondCounterForOperation = 4;
+                        break;
+                }
+            }
+            else if (OperationPressedAmount == 2)
+            {
+                switch (btn.Text)
+                {
+                    case "+":
+                        calculator.operation = Calculator.Operation.PLUS;
+                    SecondCounterForOperation = 1;
+                        break;
+                    case "-":
+                        calculator.operation = Calculator.Operation.MINUS;
+                        SecondCounterForOperation = 2;
+                        break;
+                    case "÷":
+                        calculator.operation = Calculator.Operation.DIVIDED;
+                       SecondCounterForOperation = 3;
+                        break;
+                    case "*":
+                        calculator.operation = Calculator.Operation.TIMES;
+                       SecondCounterForOperation = 4;
+                        break;
+                }
+            }
+            if (OperationPressedAmount == 2)
+                {
+                    switch (CounterForOperation)
                     {
-                        case Calculator.Operation.DIVIDED:
+                        case 3:
                             display.Text = (calculator.firstNumber / double.Parse(display.Text)).ToString();
                             break;
-                        case Calculator.Operation.MINUS:
+                        case 2:
                             display.Text = ((-1)*double.Parse(display.Text) + calculator.firstNumber).ToString();
                             break;
-                        case Calculator.Operation.TIMES:
+                        case 4:
                             display.Text = (double.Parse(display.Text) * calculator.firstNumber).ToString();
                             break;
-                        case Calculator.Operation.PLUS:
+                        case 1:
                             display.Text = (double.Parse(display.Text) + calculator.firstNumber).ToString();
                             break;
                     }
-                    OperationPressedAmount = 0;
+                   OperationPressedAmount = 0;
                     calculator.saveFirstNumber(display.Text);
-                    
-
-            }
+             }
+            FirstNumberIsNotEmpty = true;
             NoOperationSign = false;
             NumberPressed = false;
             CounterForEqualsAndNumbersAmount = 0;
-                   }
+            calculator.saveFirstNumber(display.Text);
+        }
          
 
         private void Form1_Load(object sender, EventArgs e)

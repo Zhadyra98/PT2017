@@ -238,6 +238,7 @@
             this.B12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.B12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.B12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.B12.ImageKey = "(отсутствует)";
             this.B12.Location = new System.Drawing.Point(149, 196);
             this.B12.Name = "B12";
             this.B12.Size = new System.Drawing.Size(59, 39);
@@ -277,7 +278,7 @@
             this.B13.Name = "B13";
             this.B13.Size = new System.Drawing.Size(91, 39);
             this.B13.TabIndex = 17;
-            this.B13.Text = "/";
+            this.B13.Text = "÷";
             this.B13.UseVisualStyleBackColor = true;
             this.B13.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -332,7 +333,6 @@
             // 
             // B8
             // 
-            this.B8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("B8.BackgroundImage")));
             this.B8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.B8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.B8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -340,12 +340,12 @@
             this.B8.Name = "B8";
             this.B8.Size = new System.Drawing.Size(60, 39);
             this.B8.TabIndex = 22;
+            this.B8.Text = "x²";
             this.B8.UseVisualStyleBackColor = true;
             this.B8.Click += new System.EventHandler(this.button22_Click);
             // 
             // B7
             // 
-            this.B7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("B7.BackgroundImage")));
             this.B7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.B7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.B7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -353,6 +353,7 @@
             this.B7.Name = "B7";
             this.B7.Size = new System.Drawing.Size(60, 39);
             this.B7.TabIndex = 23;
+            this.B7.Text = "√";
             this.B7.UseVisualStyleBackColor = true;
             this.B7.Click += new System.EventHandler(this.button23_Click);
             // 
